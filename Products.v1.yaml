@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  title: Products
+  version: '1.0'
+  description: GET AND POST product details
+servers:
+  - url: 'https://www.rapidwms.com'
+paths:
+  /Api/Products/set:
+    post:
+      summary: Add / Update Products
+      operationId: post-product
+      responses:
+        '200':
+          description: Products updated
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  status:
+                    type: string
+                    minLength: 1
+                required:
+                  - status
+              examples:
+                Update / Create Product:
+                  value:
+                    status: success
+                Error:
+                  value:
+                    error: message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                sku:
+                  type: string
+                  minLength: 1
+                name:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                price:
+                  type: number
+                weight:
+                  type: number
+                length:
+                  type: number
+                width:
+                  type: number
+                height:
+                  type: number
+                quantityPerCase:
+                  type: integer
+                masterWeight:
+                  type: number
+                masterLength:
+                  type: number
+                masterWidth:
+                  type: number
+                masterHeight:
+                  type: number
+                cost:
+                  type: number
+                msrp:
+                  type: number
+                upc:
+                  type: string
+                  minLength: 1
+                mpn:
+                  type: string
+                  minLength: 1
+                asin:
+                  type: string
+                  minLength: 1
+                countryOfOrigin:
+                  type: string
+                  minLength: 1
+                  description: ISO alpha-2
+                productType:
+                  type: string
+                  minLength: 1
+                vendor:
+                  type: string
+                  minLength: 1
+                  description: Value is appended to product to existing product vendor list
+                image:
+                  type: string
+                  minLength: 1
+                  description: Complete product URL
+                inventory:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  description: 'Inventory object restricted to Rapidwms administrators. '
+                  items:
+                    type: object
+                    properties:
+                      warehouseId:
+                        type: integer
+                      bins:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            binName:
+                              type: string
+                              minLength: 1
+                            quantity:
+                              type: integer
+                relatedProducts:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      sku:
+                        type: string
+                        minLength: 1
+                      quantity:
+                        type: integer
+              required:
+                - sku
+                - name
+            examples:
+              Create Product with SKU 4485243DS:
+                value:
+                  products_id: 1227
+                  sku: 4485243DS
+                  name: Green Drip Taper with Real Brass Holder and Timer
+                  description: Green Drip Taper with Real Brass Holder and Timer
+                  price: 10
+                  weight: 3
+                  length: 12
+                  width: 12
+                  height: 12
+                  quantityPerCase: '1'
+                  masterWeight: '1'
+                  masterLength: '2'
+                  masterWidth: '3'
+                  masterHeight: '4'
+                  cost: 9.99
+                  msrp: 20
+                  upc: '34344343'
+                  mpn: ADASREDDDD
+                  asin: EADSFASFDFFDA
+                  countryOfOrigin: CN
+                  productType: Assembly
+                  vendor: Acorn Packaging
+                  image: >-
+                    http://images.sample.com/latest/37474/main/large_tn-912110873.jpg
+                  inventory:
+                    - warehouseId: 1
+                      bins:
+                        - binName: Q-209-B-03
+                          quantity: 100
+                        - binName: Q-209-B-04
+                          quantity: 100
+                    - warehouseId: 2
+                      bins:
+                        - binName: QQ-209-B-03
+                          quantity: 100
+                        - binName: QQ-209-B-04
+                          quantity: 100
+                  relatedProducts:
+                    - sku: 104-105-43
+                      quantity: 3
+                    - sku: DSDFDD-FFE
+                      quantity: 3
+        description: Post the necessary fields for the API to update or create new products
+      description: Update or Create New Product
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+          required: true
+        - schema:
+            type: string
+            example: Must include bearer token obtained during authentication
+          in: header
+          name: Authorization
+          description: Bearer
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json; charset=utf-8
+    parameters: []
+  /Api/Products/get:
+    get:
+      summary: Get products
+      tags: []
+      responses: {}
+      operationId: get-Api-Products-get
+      description: Get list of products
+      parameters:
+        - schema:
+            type: string
+            example: Must include token generated during authentication
+          in: header
+          name: Authorization
+          description: Bearer
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json; charset=utf-8
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+        - schema:
+            type: string
+          in: query
+          name: sku
+          description: Search by sku
+        - schema:
+            type: string
+          in: query
+          name: productsId
+          description: Search by products id
+components:
+  schemas: {}

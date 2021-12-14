@@ -1,0 +1,578 @@
+openapi: 3.0.0
+info:
+  title: Orders
+  version: '1.0'
+  description: Get Orders
+servers:
+  - url: 'https://www.rapidwms.com'
+paths:
+  /Orders/get:
+    get:
+      summary: Get Orders
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        internalOrderId:
+                          type: number
+                        orderId:
+                          type: string
+                          minLength: 1
+                        orderParentId: {}
+                        channelOrderId:
+                          type: string
+                          minLength: 1
+                        isRush:
+                          type: boolean
+                        isGift:
+                          type: boolean
+                        shippingStatus:
+                          type: string
+                          minLength: 1
+                        datePurchased:
+                          type: string
+                          minLength: 1
+                        lastUpdated:
+                          type: string
+                          minLength: 1
+                        company:
+                          type: string
+                          minLength: 1
+                        shipDate: {}
+                        shippingAddress:
+                          type: object
+                          properties:
+                            firstName:
+                              type: string
+                              minLength: 1
+                            LastName:
+                              type: string
+                              minLength: 1
+                            companyName:
+                              type: string
+                            streetLine1:
+                              type: string
+                              minLength: 1
+                            streetLine2:
+                              type: string
+                            City:
+                              type: string
+                              minLength: 1
+                            state:
+                              type: string
+                              minLength: 1
+                            PostalCode:
+                              type: string
+                              minLength: 1
+                            country:
+                              type: string
+                              minLength: 1
+                            phoneNumber:
+                              type: string
+                        billingAddress:
+                          type: object
+                          properties:
+                            firstName:
+                              type: string
+                              minLength: 1
+                            LastName:
+                              type: string
+                              minLength: 1
+                            companyName:
+                              type: string
+                            streetLine1:
+                              type: string
+                              minLength: 1
+                            streetLine2:
+                              type: string
+                            City:
+                              type: string
+                              minLength: 1
+                            state:
+                              type: string
+                              minLength: 1
+                            PostalCode:
+                              type: string
+                              minLength: 1
+                            country:
+                              type: string
+                              minLength: 1
+                            phoneNumber: {}
+                        shippingCarrier:
+                          type: string
+                          minLength: 1
+                        shippingService:
+                          type: string
+                          minLength: 1
+                        customerEmail:
+                          type: string
+                          minLength: 1
+                        requireSignatureConfirmation:
+                          type: string
+                          minLength: 1
+                        channel:
+                          type: string
+                          minLength: 1
+                        importedSource:
+                          type: string
+                          minLength: 1
+                        shipments:
+                          type: array
+                          uniqueItems: true
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              tracking:
+                                type: string
+                                minLength: 1
+                              cost:
+                                type: number
+                              weight:
+                                type: number
+                              length:
+                                type: number
+                              width:
+                                type: number
+                              height:
+                                type: number
+                              dateShipped:
+                                type: string
+                                minLength: 1
+                        products:
+                          type: array
+                          uniqueItems: true
+                          minItems: 1
+                          items:
+                            type: object
+                            properties:
+                              internalOrderProductId:
+                                type: number
+                              sku:
+                                type: string
+                                minLength: 1
+                              name:
+                                type: string
+                                minLength: 1
+                              qty:
+                                type: number
+                              shippedQty:
+                                type: number
+                              pickedQty:
+                                type: number
+                              notes:
+                                type: string
+                              orderProductChannelId:
+                                type: number
+                              shipment:
+                                type: array
+                                uniqueItems: true
+                                minItems: 1
+                                items:
+                                  type: object
+                                  properties:
+                                    tracking:
+                                      type: string
+                                      minLength: 1
+                                    shippedQty:
+                                      type: number
+                              bundled:
+                                type: object
+                                properties:
+                                  sku:
+                                    type: string
+                                  qty:
+                                    type: integer
+                                  name:
+                                    type: string
+                                  shipment:
+                                    type: object
+                                    properties:
+                                      tracking:
+                                        type: string
+                                      shippedQty:
+                                        type: integer
+              examples:
+                Success:
+                  value:
+                    orders:
+                      - internalOrderId: 0
+                        orderId: string
+                        orderParentId: null
+                        channelOrderId: string
+                        isRush: true
+                        isGift: true
+                        shippingStatus: string
+                        datePurchased: string
+                        lastUpdated: string
+                        company: string
+                        shipDate: null
+                        shippingAddress:
+                          firstName: string
+                          LastName: string
+                          companyName: string
+                          streetLine1: string
+                          streetLine2: string
+                          City: string
+                          state: string
+                          PostalCode: string
+                          country: string
+                          phoneNumber: string
+                        billingAddress:
+                          firstName: string
+                          LastName: string
+                          companyName: string
+                          streetLine1: string
+                          streetLine2: string
+                          City: string
+                          state: string
+                          PostalCode: string
+                          country: string
+                          phoneNumber: null
+                        shippingCarrier: string
+                        shippingService: string
+                        customerEmail: string
+                        requireSignatureConfirmation: string
+                        channel: string
+                        importedSource: string
+                        shipments:
+                          - tracking: string
+                            cost: 0
+                            weight: 0
+                            length: 0
+                            width: 0
+                            height: 0
+                            dateShipped: string
+                        products:
+                          - internalOrderProductId: 0
+                            sku: string
+                            name: string
+                            qty: 0
+                            shippedQty: 0
+                            pickedQty: 0
+                            notes: string
+                            orderProductChannelId: 0
+                            shipment:
+                              - tracking: string
+                                shippedQty: 0
+                                cost: 0
+                            bundled:
+                              - sku: string
+                                name: string
+                                qtyPerUnit: 0
+                                totalQty: 0
+                                pickedQty: 0
+                                shipment:
+                                  - tracking: string
+                                    shippedQty: 0
+                                    cost: 0
+                Error:
+                  value:
+                    error: message
+      operationId: get-orders-get
+      description: Get Order details
+      parameters:
+        - schema:
+            type: string
+            example: Must include bearer token obtained during authentication
+          in: header
+          name: Authorization
+          description: Bearer
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json; charset=utf-8
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+        - schema:
+            type: string
+          in: query
+          name: page
+          description: Pagination
+        - schema:
+            type: string
+          in: query
+          name: limit
+          description: Number of results. Maximum 100
+        - schema:
+            type: string
+          in: query
+          name: orderId
+          description: Order Number
+    parameters: []
+    post:
+      summary: Create New Order
+      operationId: post-Orders-get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  success:
+                    type: string
+                  saved:
+                    type: number
+                  duplicates:
+                    type: number
+                  orders:
+                    type: object
+                    required:
+                      - orderId
+                    properties:
+                      orderId:
+                        type: object
+                        required:
+                          - status
+                          - errors
+                        properties:
+                          status:
+                            type: string
+                            minLength: 1
+                          errors:
+                            type: object
+                            properties:
+                              '"name"':
+                                type: string
+                required:
+                  - success
+                  - saved
+                  - duplicates
+                  - orders
+              examples:
+                Success:
+                  value:
+                    status: status
+                    saved: 0
+                    duplicates: 0
+                    orders:
+                      - orderId:
+                          errors:
+                            name: message
+                Error:
+                  value:
+                    error: message
+                Example:
+                  value:
+                    success: string
+                    saved: 0
+                    duplicates: 0
+                    orders:
+                      orderId:
+                        status: string
+                        errors:
+                          - name: string
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      description: Insert new orders
+      parameters:
+        - schema:
+            type: string
+            example: Must include bearer token obtained during authentication
+          in: header
+          name: Authorization
+          description: Authorization
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json; charset=utf-8
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                companyId:
+                  type: number
+                  description: >-
+                    Assigned companyId.  Full Access account may provide any
+                    companyId
+                facilityId:
+                  type: number
+                  description: >-
+                    Assigned FacilityId. Full Access account may provide any
+                    facilityId.  facilityId must be related to companyId
+                orders:
+                  type: array
+                  uniqueItems: true
+                  minItems: 1
+                  items:
+                    type: object
+                    properties:
+                      orderId:
+                        type: integer
+                      orderParentId:
+                        type: integer
+                      channel:
+                        type: string
+                      isRush:
+                        type: boolean
+                      shippingCarrier:
+                        type: string
+                        minLength: 1
+                      shippingService:
+                        type: string
+                        minLength: 1
+                      datePurchased:
+                        type: string
+                        minLength: 1
+                        description: 'YYYY-MM-DD HH:MM:SS'
+                      shippingAddress:
+                        type: object
+                        required:
+                          - streetLine1
+                          - city
+                          - state
+                          - postalCode
+                          - country
+                        properties:
+                          firstName:
+                            type: string
+                            minLength: 1
+                          lastName:
+                            type: string
+                            minLength: 1
+                          companyName:
+                            type: string
+                          streetLine1:
+                            type: string
+                            minLength: 1
+                          streetLine2:
+                            type: string
+                          city:
+                            type: string
+                            minLength: 1
+                            description: ''
+                          state:
+                            type: string
+                            minLength: 1
+                            description: 2 character abbreviation
+                          postalCode:
+                            type: string
+                            minLength: 1
+                          country:
+                            type: string
+                            minLength: 1
+                            description: ISO Code 2
+                      billingAddress:
+                        type: object
+                        required:
+                          - streetLine1
+                          - city
+                          - state
+                          - postalCode
+                          - country
+                        properties:
+                          firstName:
+                            type: string
+                            minLength: 1
+                          lastName:
+                            type: string
+                            minLength: 1
+                          companyName:
+                            type: string
+                          streetLine1:
+                            type: string
+                            minLength: 1
+                            description: Required if billingAddress included
+                          streetLine2:
+                            type: string
+                          city:
+                            type: string
+                            minLength: 1
+                            description: Required if billingAddress included
+                          state:
+                            type: string
+                            minLength: 1
+                            description: >-
+                              2 character abbreviation. Required if
+                              billingAddress included
+                          postalCode:
+                            type: string
+                            minLength: 1
+                            description: Required if billingAddress included
+                          country:
+                            type: string
+                            minLength: 1
+                            description: ISO CODE 2
+                      phoneNumber:
+                        type: string
+                        minLength: 1
+                      customerEmail:
+                        type: string
+                        minLength: 1
+                      products:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            qty:
+                              type: integer
+                            sku:
+                              type: string
+                              minLength: 1
+                            orderProductChannelId:
+                              type: integer
+                            bundled:
+                              type:
+                                - string
+                                - object
+                              properties:
+                                sku:
+                                  type: string
+                                  description: Required if bundle included
+                                qty:
+                                  type:
+                                    - string
+                                    - integer
+                                  description: Required if bundle included
+                              required:
+                                - sku
+                                - qty
+                          required:
+                            - qty
+                            - sku
+                    required:
+                      - orderId
+                      - shippingCarrier
+                      - shippingService
+                      - datePurchased
+                      - shippingAddress
+              required:
+                - companyId
+                - facilityId
+                - orders
+components:
+  schemas: {}
+  securitySchemes: {}

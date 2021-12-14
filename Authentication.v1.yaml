@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: Authentication
+  version: '1.0'
+  description: >-
+    Obtain authorization token.  Authorization tokens are required for all
+    server requests.  
+servers:
+  - url: 'https://www.rapidwms.com'
+paths:
+  /AuthToken/gettoken:
+    post:
+      summary: Authentication
+      operationId: Generate authorization token
+      responses:
+        '200':
+          description: Retreive authorization token
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    minLength: 1
+                  expires_in:
+                    type: number
+                  token_type:
+                    type: string
+                    minLength: 1
+                  scope:
+                    type: string
+                    minLength: 1
+                  refresh_token:
+                    type: string
+                    minLength: 1
+                required:
+                  - access_token
+                  - expires_in
+                  - token_type
+                  - scope
+                  - refresh_token
+              examples:
+                Success:
+                  value:
+                    access_token: 3a8520e323ab791170f6d6a8f4dbb2383197b75c
+                    expires_in: 3600
+                    token_type: Bearer
+                    scope: app
+                    refresh_token: c682df343210ff219171a2553375fe51353cb2ec
+                Error:
+                  value:
+                    error: invalid_request
+                    error_description: Malformed auth header
+        '':
+          description: ''
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              description: ''
+              type: object
+            examples:
+              Example:
+                value: 'grant_type=password&username={USERNAME}&password={PASSWORD}'
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: 'grant_type=password&username={USERNAME}&password={PASSWORD}'
+      description: Generated authorization token required for all server requests
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/x-www-form-urlencoded
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: grant_type
+          description: Must be set to 'password'
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: username
+          description: Assigned username
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: Accept
+          description: application/x-www-form-urlencoded; charset=utf-8
+          required: true
+        - schema:
+            type: string
+            example: Base64 encoded username password pair
+          in: header
+          name: Authorization
+          description: Basic
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: password
+          description: Assigned password
+          required: true
+    parameters: []
+components:
+  schemas: {}
+  securitySchemes:
+    API Key - 1:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: ''
+          refreshUrl: ''
+          scopes: {}
+        clientCredentials:
+          tokenUrl: ''
+          refreshUrl: ''
+          scopes: {}
